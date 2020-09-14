@@ -1,0 +1,68 @@
+-- CREATION TABLE ateliers_apprenants, (id_atelier 1 = C1)
+CREATE TABLE ateliers_apprenants (id INTEGER PRIMARY KEY, id_atelier TEXT, nom TEXT, validation TEXT);
+
+-- ON ADD LES DONNEES
+-- C1
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Fatima", "Vert");
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Deborah", "Vert");
+
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Maxim", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Steeven", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Camille", "Bleu");
+
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Jojo", "Violet");
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Pierre", "Violet");
+INSERT INTO ateliers_apprenants VALUES (? , 1, "Clement", "Violet");
+
+-- C2
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Fatima", "Vert");
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Deborah", "Vert");
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Steeven", "Vert");
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Camille", "Vert");
+
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Lucas", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Chloe", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Pierre", "Bleu");
+
+INSERT INTO ateliers_apprenants VALUES (? , 2, "Jojo", "Violet");
+
+
+--C3
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Isa", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Julie", "Bleu");
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Voja", "Bleu");
+
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Jojo", "Violet");
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Steeven", "Violet");
+INSERT INTO ateliers_apprenants VALUES (? , 3, "Camille", "Violet");
+
+
+
+-- ON CREE UNE DEUXIEME TABLE (POUR LE FUN) AFIN DE DETAILLER SUR QUOI PORTENT LES COMPETENCE
+CREATE TABLE ateliers_infos (id INTEGER PRIMARY KEY, competence TEXT, infos TEXT);
+
+INSERT INTO ateliers_infos VALUES (? , "C1", "Concevoir et structurer physiquement une base de données relationnelle ou non, à partir des besoins, contraintes et données du commanditaire.");
+INSERT INTO ateliers_infos VALUES (? , "C2", "Acquérir des données, les combiner et les structurer en données propres en vue de leur intégration dans la structure de la base de données.");
+INSERT INTO ateliers_infos VALUES (? , "C3", "Intégrer des données propres et préparées dans la base de données finale, en utilisant des langages informatiques, logiciels ou outils");
+
+--  VOICI LES DEUX TABLES
+SELECT * FROM ateliers_apprenants;
+SELECT * FROM ateliers_infos;
+
+
+--ON PEUT AUSSI FAIRE UN JOIN POUR PLUS DE CLARETE :
+SELECT ateliers_apprenants.nom, ateliers_infos.competence, ateliers_apprenants.validation FROM ateliers_apprenants
+JOIN ateliers_infos 
+ON ateliers_infos.id = ateliers_apprenants.id_atelier;
+
+
+-- CHANGER JO de violet en vert pour la C1
+UPDATE ateliers_apprenants
+SET validation = "Vert" 
+WHERE nom = "Jojo" AND id_atelier = 1;
+
+
+-- REMETTRE JO COMME AVANT
+UPDATE ateliers_apprenants
+SET validation = "Violet" 
+WHERE nom = "Jojo" AND id_atelier = 1;
